@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   `task_details` text,
   `date_added` datetime DEFAULT NULL,
   `date_due` datetime DEFAULT NULL,
-  `date_completed` datetime DEFAULT NULL,
+  `date_done` datetime DEFAULT NULL,
   PRIMARY KEY (`task_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
