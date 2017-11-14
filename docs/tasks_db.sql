@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   `task_group` enum('A','B','C','D','E') NOT NULL DEFAULT 'A',
   `task_title` varchar(255) DEFAULT NULL,
   `task_details` text,
+  `task_priority` int(11) DEFAULT NULL,
   `date_added` datetime DEFAULT NULL,
   `date_due` datetime DEFAULT NULL,
   `date_done` datetime DEFAULT NULL,
