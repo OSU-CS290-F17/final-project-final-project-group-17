@@ -1,0 +1,155 @@
+body
+{
+	margin: 0;
+}
+
+/*contains all the styling for the elements in the header*/
+header
+{	
+	background-color: #FF6D10;
+	height: 20mm;
+}
+
+#site-title h1
+{
+	font-size: 250%;
+	font-family: "Ubuntu", sans-serif;
+	font-weight: 700;
+	padding-top: 1%;
+	padding-left: 2%;
+}
+
+/*contains all the styling for the group container elements*/
+#container
+{
+	display: flex;
+	flex-wrap: wrap;
+	
+	margin: 1%;
+	border: solid rgba(0,0,0,.25);
+}
+
+.group-container
+{
+	width: 40%;
+	flex: auto;
+	margin: 1%;
+	border: solid rgba(0,0,0,.25);
+	border-radius: 5px;
+}
+
+.group-container-header
+{
+	background-color: #FF6D10;
+	display: flex;
+}
+
+.group-header-title
+{
+	margin: 0;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: "Ubuntu", sans-serif;
+	font-weight: 500;
+}
+
+.group-header-add-task
+{
+	margin: 1px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 3px;
+	color: white;
+	background-color:black;
+	
+}
+
+/*Contains the styling for the tasks and their containers*/
+.task-container
+{
+	display: flex;
+	justify-content: center;
+}
+
+.task-container span h1
+{
+	display: inline-flex;
+	font-family: "Ubuntu", sans-serif;
+	font-weight: 400;
+	font-size: 14px;
+}
+
+.task-container span .remove-task
+{
+	font-size: 16px;
+	padding: 0 5px;
+	border-radius: 3px;
+	background-color: black;
+	color: white;
+}
+
+/*Contains all the styling for modal elements*/
+#modal-backdrop
+{
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 1010;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,.8);
+}
+
+#add-task-modal
+{
+	font-family: "Ubuntu", sans-serif;
+	font-weight: 500;
+	background-color: gray;
+	width: 50%;
+	height: 70%;
+	margin: auto;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 1010;
+
+	
+}
+
+#close-modal-top
+{
+	margin: 1px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 3px;
+	color: white;
+	background-color: black;
+}
+
+.input-descriptor
+{
+	display: inline;
+	margin: 10px;
+}
+
+#input-container
+{
+	margin: 0 auto;
+	width: 90%;
+}
+
+.add-task-input
+{
+	margin: 10px;
+	width: 70%;
+	
+}
+
+.hidden
+{
+	display: none;
+}

@@ -1,0 +1,106 @@
+<! DOCTYPE html>
+<html>
+	<head>
+		<title>Task Manager</title>
+		<meta chartype="utf-8">
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,500,700" rel="stylesheet"><!--adds the ubuntu font-->
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	
+	<body>
+		<header>
+			<div class="site-header" id="site-title">
+				<h1>Task Organizer</h1>
+			</div>
+		</header>
+		
+		<main>
+			<div id="container">
+				<div class="group-container" id="group-A">
+					<span class="group-container-header" id="group-A-header">
+						<h2 class="group-header-title">Group A</h2>
+						<h2 class="group-header-add-task" id="add-task-A">+</h2>
+					</span>
+					
+					<!--This will contain the list of tasks for this group.
+						Use the taskContainerTemplate to add a task.-->
+					<div class="task-container" data-group="{{taskGroup}}" data-priority="{{taskPriority}}">
+						<span>
+							<h1 class="short-desc">{{taskShortDesc}}</h1>
+							<h1 class="add-date">{{taskAddDate}}</h1>
+							<h1 class="due-date">{{taskDueDate}}</h1>
+							<h1 class="remove-task">--</h1>
+						</span>
+					</div>
+					
+				</div>
+				
+				<div class="group-container" id="group-B">
+					<span class="group-container-header" id="group-B-header">
+						<h2 class="group-header-title">Group B</h2>
+						<h2 class="group-header-add-task" id="add-task-B">+</h2>
+					</span>
+					
+					<!--This will contain the list of tasks for this group.
+						Use the taskContainerTemplate to add a task.-->
+					<div class="task-container" data-group="{{taskGroup}}" data-priority="{{taskPriority}}">
+						<span>
+							<h1 class="short-desc">{{taskShortDesc}}</h1>
+							<h1 class="add-date">{{taskAddDate}}</h1>
+							<h1 class="due-date">{{taskDueDate}}</h1>
+							<h1 class="remove-task">--</h1>
+						</span>
+					</div>
+				</div>
+				
+				<div class="group-container" id="group-C">
+					<span class="group-container-header" id="group-C-header">
+						<h2 class="group-header-title">Group C</h2>
+						<h2 class="group-header-add-task" id="add-task-C">+</h2>
+					</span>
+					
+					<!--This will contain the list of tasks for this group.
+						Use the taskContainerTemplate to add a task.-->
+				</div>
+				
+				<div class="group-container" id="group-D">
+					<span class="group-container-header" id="group-D-header">
+						<h2 class="group-header-title">Group D</h2>
+						<h2 class="group-header-add-task" id="add-task-D">+</h2>
+					</span>
+					
+					<!--This will contain the list of tasks for this group.
+						Use the taskContainerTemplate to add a task.-->
+				</div>
+				
+				<div class="group-container" id="group-E">
+					<span class="group-container-header" id="group-E-header">
+						<h2 class="group-header-title">Group E</h2>
+						<h2 class="group-header-add-task" id="add-task-E">+</h2>
+					</span>
+					
+					<!--This will contain the list of tasks for this group.
+						Use the taskContainerTemplate to add a task.-->
+				</div>
+			</div>
+			
+			<div class="hidden" id="modal-backdrop">
+				<div class="hidden" id="add-task-modal">
+				
+					<span class="group-container-header">
+						<h3 class="group-header-title">Add your task</h3>
+						<h3 id="close-modal-top">x</h3>
+					</span>
+					
+					<form id="input-container">
+						<h4 class="input-descriptor">Short Description:</h4><input class="add-task-input" type="text" name="shortDesc" maxlength=50><br>
+						<h4 class="input-descriptor">Due Date:</h4><input class="add-task-input" type="date" name="dueDate"><br>
+						<h4 class="input-descriptor">Task Priority:</h4><input class="add-task-input" type="number"><br>
+						<h4 class="input-descriptor">Full Description:</h4><input class="add-task-input" type="text" name="fullDesc"><br>
+					</form>
+				</div>
+			</div>
+		</main>
+	</body>
+
+</html>
