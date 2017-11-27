@@ -2,11 +2,12 @@
   "name": "ToDo",
   "version": "0.0.1",
   "description": "Web based todo application.",
-  "main": "js/server.js",
+  "main": "server.js",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
+    "start": "node js/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

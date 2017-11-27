@@ -6,6 +6,40 @@ var exphbs   = require('express-handlebars');
 var app      = express();
 var port     = process.env.PORT || 3000;
 
+var db       = require('./database');
+
+
+/* Database Stubs */
+app.get("/ajax/loadtasks", function(req, res) {
+  console.log("==db", db);
+  res.status(200).send(db.loadAllTasks());
+
+});
+
+app.get("/ajax/loadtasks/:groupId", function(req, res) {
+  console.log("==db", db);
+  res.status(200).send(db.loadAllTasksByGroup(req.params.groupId));
+
+});
+
+app.get("/ajax/deltasks", function(req, res) {
+
+
+});
+
+app.get("/ajax/savetasks", function(res, res) {
+
+  res.status(200).send(db.saveTask(  {
+      "task_group": "B",
+      "task_title": "Fake Dynamic Task",
+      "task_details": "This is a very long description of a dynamic task.",
+      "task_priority": "1",
+      "date_added": "2017-11-21",
+      "date_due": "2017-12-01",
+      "date_done": ""
+    } ));
+
+});
 
 
 /* Serve public directory */

@@ -1,4 +1,6 @@
-[
+{
+  "max_task_id": 105,
+  "tasks": [
   {
     "task_id": "100",
     "task_group": "A",
@@ -7,7 +9,7 @@
     "task_priority": "0",
     "date_added": "2017-11-18",
     "date_due": "2017-12-01",
-    "date_done": "",
+    "date_done": ""
   },
   {
     "task_id": "101",
@@ -17,7 +19,7 @@
     "task_priority": "0",
     "date_added": "2017-11-18",
     "date_due": "2017-12-01",
-    "date_done": "",
+    "date_done": ""
   },
   {
     "task_id": "102",
@@ -27,7 +29,7 @@
     "task_priority": "0",
     "date_added": "2017-11-18",
     "date_due": "2017-12-01",
-    "date_done": "",
+    "date_done": ""
   },
   {
     "task_id": "103",
@@ -37,17 +39,17 @@
     "task_priority": "0",
     "date_added": "2017-11-21",
     "date_due": "2017-12-01",
-    "date_done": "",
+    "date_done": ""
   },
   {
-    "task_id": "103",
+    "task_id": "104",
     "task_group": "E",
     "task_title": "Sample Task for Category E",
     "task_details": "This is a very long description of a task.",
     "task_priority": "0",
     "date_added": "",
     "date_due": "2017-12-01",
-    "date_done": "2017-11-20",
+    "date_done": "2017-11-20"
   },
   {
     "task_id": "105",
@@ -57,6 +59,7 @@
     "task_priority": "1",
     "date_added": "2017-11-18",
     "date_due": "2017-12-01",
-    "date_done": "",
-  },
-]
+    "date_done": ""
+  }
+  ]
+}

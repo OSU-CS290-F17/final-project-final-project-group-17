@@ -1,3 +1,17 @@
+
+
+module.exports = new FileDatabase();
+
+// -----------------------------------------------------------------------------
+
+function FileDatabase() {
+
+  this.tasksDB = require("./db.json");
+  this.fs = require("fs");
+
+
+}
+
 /* Database Interface
  *
  * Contains all functions for getting data to and from the database on the
@@ -13,7 +27,10 @@
  * Returns:
  *    array of Task objects
  */
-function loadAllTasks() {
+FileDatabase.prototype.loadAllTasks = function() {
+
+
+  return this.tasksDB["tasks"];
 
 }
 
@@ -25,8 +42,15 @@ function loadAllTasks() {
  * Returns:
  *    array of Task objects
  */
-function loadAllTasksByGroup(group) {
+FileDatabase.prototype.loadAllTasksByGroup = function(group) {
+  var filtered = new Array();
 
+  this.tasksDB["tasks"].forEach(function(task) {
+    if (group.trim().toUpperCase() == task.task_group) {
+      filtered.push(task);
+    }
+  });
+  return filtered;
 }
 
 /* Save a task object to the database. If the object does not contain a task_id
@@ -42,7 +66,17 @@ function loadAllTasksByGroup(group) {
  * Returns:
  *    object { status: true || false, task_id: task_id }
  */
-function saveTask(task) {
+FileDatabase.prototype.saveTask = function(task) {
+  // should we do error correction here?
+
+  this.tasksDB["max_task_id"]++;
+  task['task_id'] = this.tasksDB["max_task_id"];
+
+  this.tasksDB["tasks"].push(task);
+
+  this._savetoDisk();
+
+  return false;
 
 }
 
@@ -57,6 +91,17 @@ function saveTask(task) {
  * Returns:
  *    boolean true or false
  */
-function deleteTask(task) {
+FileDatabase.prototype.deleteTask = function(task) {
 
+  return false;
+
+}
+
+/*
+ * Safe task database to disk.
+ *
+ */
+FileDatabase.prototype._savetoDisk = function() {
+
+  this.fs.writeFile('./data.json', JSON.stringify(this.tasksDB, null, 2) , 'utf-8');
 }
