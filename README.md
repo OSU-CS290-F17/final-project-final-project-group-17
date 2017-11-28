@@ -16,8 +16,9 @@ CS290 Final Project for group 17 - A web based interface for an ABCDE time manag
 * Node.js
 * Node.js Express
 * Node.js Handlebars
-* Node.js MySQL
-* MySQL
+* Node.js Body-Parser
+* Node.js MongoDB
+* Mongo DB
 
 ### Installation Instructions
 
