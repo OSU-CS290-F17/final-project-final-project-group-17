@@ -27,6 +27,7 @@ Tasks contain eight data elements, some will be automatically generated and othe
 
 
 #### GET /ajax/loadtasks
+---
 
 Fetch all tasks that exist in the database.
 
@@ -36,6 +37,7 @@ __Return Status:__
 
 
 #### GET /ajax/loadtasks/:groupId
+---
 
 Fetch all tasks that exist in the database that are in a particular group identified by groupId. Valid groups are: A B C D E
 
@@ -45,6 +47,7 @@ __Return Status:__
 
 
 #### GET /ajax/deltask/:taskId
+---
 
 Delete the task specified by :taskId
 
@@ -54,6 +57,7 @@ __Return Status:__
 
 
 #### POST /ajax/savetask
+---
 
 Save or update a task. POST should contain a serialized JSON object of a single Task object.
 
