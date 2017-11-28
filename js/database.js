@@ -86,14 +86,19 @@ FileDatabase.prototype.saveTask = function(task) {
  * A boolean will be returned with the result of the delete operation.
  *
  * Params:
- *   task - a filled Task object
+ *   task_id - an id of a task
  *
  * Returns:
  *    boolean true or false
  */
-FileDatabase.prototype.deleteTask = function(task) {
+FileDatabase.prototype.deleteTask = function(task_id) {
+  var start_size = this.tasksDB["tasks"].length;
 
-  return false;
+  this.tasksDB["tasks"] = this.tasksDB["tasks"].filter( function(row) { return (row.task_id != task_id) });
+
+  console.log("==Size: ", this.tasksDB["tasks"])
+  // Should save here
+  return this.tasksDB["tasks"].length < start_size;
 
 }
 
@@ -103,5 +108,5 @@ FileDatabase.prototype.deleteTask = function(task) {
  */
 FileDatabase.prototype._savetoDisk = function() {
 
-  this.fs.writeFile('./data.json', JSON.stringify(this.tasksDB, null, 2) , 'utf-8');
+  this.fs.writeFile('./js/db.json', JSON.stringify(this.tasksDB, null, 2) , 'utf-8');
 }

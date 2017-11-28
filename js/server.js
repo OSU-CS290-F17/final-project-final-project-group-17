@@ -22,8 +22,9 @@ app.get("/ajax/loadtasks/:groupId", function(req, res) {
 
 });
 
-app.get("/ajax/deltasks", function(req, res) {
+app.get("/ajax/deltask/:taskId", function(req, res) {
 
+  res.status(200).send(db.deleteTask(req.params.taskId));
 
 });
 
