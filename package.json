@@ -2,7 +2,7 @@
   "name": "ToDo",
   "version": "0.0.1",
   "description": "Web based todo application.",
-  "main": "server.js",
+  "main": "js/server.js",
   "directories": {
     "doc": "docs"
   },
