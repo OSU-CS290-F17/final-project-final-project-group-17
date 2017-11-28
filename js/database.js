@@ -1,25 +1,22 @@
-
-
-module.exports = new FileDatabase();
-
-// -----------------------------------------------------------------------------
-
-function FileDatabase() {
-
-  this.tasksDB = require("./db.json");
-  this.fs = require("fs");
-
-
-}
-
 /* Database Interface
  *
  * Contains all functions for getting data to and from the database on the
  * server side.
  *
+ * FA17_CS290 Final Project
  * Casey Dinsmore
  *
  */
+
+ module.exports = new FileDatabase();
+
+ function FileDatabase() {
+
+   this.tasksDB = require("./db.json");
+   this.fs = require("fs");
+
+ }
+
 
 /* Load all Task objects from the database sorted by task_group then task_priority
  * @TODO Evaluate if this is actually needed
@@ -29,8 +26,7 @@ function FileDatabase() {
  */
 FileDatabase.prototype.loadAllTasks = function() {
 
-
-  return this.tasksDB["tasks"];
+  return JSON.stringify(this.tasksDB["tasks"]);
 
 }
 
@@ -50,7 +46,7 @@ FileDatabase.prototype.loadAllTasksByGroup = function(group) {
       filtered.push(task);
     }
   });
-  return filtered;
+  return JSON.stringify(filtered);
 }
 
 /* Save a task object to the database. If the object does not contain a task_id
@@ -69,14 +65,19 @@ FileDatabase.prototype.loadAllTasksByGroup = function(group) {
 FileDatabase.prototype.saveTask = function(task) {
   // should we do error correction here?
 
-  this.tasksDB["max_task_id"]++;
-  task['task_id'] = this.tasksDB["max_task_id"];
+  // lazy modfiy, delete old task and insert new with the same task_id
+  if (parseInt(task.task_id) > 0) {
+    this.deleteTask(task.task_id);
+    this.tasksDB["tasks"].push(task);
+  } else {
+    // increment task_id and push new task
+    this.tasksDB["max_task_id"]++;
+    task.task_id = this.tasksDB["max_task_id"];
+    this.tasksDB["tasks"].push(task);
+  }
 
-  this.tasksDB["tasks"].push(task);
-
-  this._savetoDisk();
-
-  return false;
+  this._saveToDisk();
+  return task.task_id;
 
 }
 
@@ -96,8 +97,7 @@ FileDatabase.prototype.deleteTask = function(task_id) {
 
   this.tasksDB["tasks"] = this.tasksDB["tasks"].filter( function(row) { return (row.task_id != task_id) });
 
-  console.log("==Size: ", this.tasksDB["tasks"])
-  // Should save here
+  this._saveToDisk();
   return this.tasksDB["tasks"].length < start_size;
 
 }
@@ -106,7 +106,6 @@ FileDatabase.prototype.deleteTask = function(task_id) {
  * Safe task database to disk.
  *
  */
-FileDatabase.prototype._savetoDisk = function() {
-
-  this.fs.writeFile('./js/db.json', JSON.stringify(this.tasksDB, null, 2) , 'utf-8');
+FileDatabase.prototype._saveToDisk = function() {
+  this.fs.writeFileSync('./js/db.json', JSON.stringify(this.tasksDB, null, 2) , 'utf-8');
 }

@@ -5,41 +5,36 @@ var express  = require('express');
 var exphbs   = require('express-handlebars');
 var app      = express();
 var port     = process.env.PORT || 3000;
-
+var bp       = require('body-parser');
 var db       = require('./database');
 
+/* Body Parser Middleware */
+app.use(bp.json());
 
-/* Database Stubs */
+/* Database Middleware */
 app.get("/ajax/loadtasks", function(req, res) {
-  console.log("==db", db);
   res.status(200).send(db.loadAllTasks());
-
 });
 
 app.get("/ajax/loadtasks/:groupId", function(req, res) {
-  console.log("==db", db);
   res.status(200).send(db.loadAllTasksByGroup(req.params.groupId));
-
 });
 
 app.get("/ajax/deltask/:taskId", function(req, res) {
-
-  res.status(200).send(db.deleteTask(req.params.taskId));
-
+  if (db.deleteTask(req.params.taskId)) {
+    res.status(200).send("OK");
+  } else {
+    res.status(500).send("ERROR");
+  }
 });
 
-app.get("/ajax/savetasks", function(res, res) {
-
-  res.status(200).send(db.saveTask(  {
-      "task_group": "B",
-      "task_title": "Fake Dynamic Task",
-      "task_details": "This is a very long description of a dynamic task.",
-      "task_priority": "1",
-      "date_added": "2017-11-21",
-      "date_due": "2017-12-01",
-      "date_done": ""
-    } ));
-
+app.post("/ajax/savetask", function(req, res) {
+  id = db.saveTask(req.body);
+  if (parseInt(id) > 0) {
+    res.status(200).send(JSON.stringify({task_id: id}));
+  } else {
+    res.status(500).send("ERROR");
+  }
 });
 
 
