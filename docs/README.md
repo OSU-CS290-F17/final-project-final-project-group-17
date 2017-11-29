@@ -23,9 +23,53 @@ Tasks contain eight data elements, some will be automatically generated and othe
 | date_done      |  datetime                  | Automatic  | Format: 'YYYY-MM-DD HH:MM:SS' |
 
 
-### Database Interface
+### Database HTTP API
 
-Database Interfaces accept and return a Task object or a collection of Task objects. This Task object will be defined in javascript and instantiated for task in the visible page.
+
+#### GET /ajax/loadtasks
+---
+
+Fetch all tasks that exist in the database.
+
+__Return Status:__
+* 200 - Query was processed, Response: JSON encoded array of Task objects.
+* 500 - Error loading (unspecified). Response: JSON encoded empty array
+
+
+#### GET /ajax/loadtasks/:groupId
+---
+
+Fetch all tasks that exist in the database that are in a particular group identified by groupId. Valid groups are: A B C D E
+
+__Return Status:__
+* 200 - Query was processed, Response: JSON serialized array of Task objects.
+* 500 - Error loading (unspecified). Response: JSON encoded empty array
+
+
+#### GET /ajax/deltask/:taskId
+---
+
+Delete the task specified by :taskId
+
+__Return Status:__
+* 200 - Query was processed, Response: blank
+* 500 - Error loading (unspecified). Response: blank
+
+
+#### POST /ajax/savetask
+---
+
+Save or update a task. POST should contain a serialized JSON object of a single Task object.
+
+__Return Status:__
+* 200 - Task was saved, Response: JSON serialized object { task_id: new_task_id }
+* 500 - Error saving (unspecified). Response: error message
+
+
+
+### Database ADT
+
+Database ADT accept and return a Task object or a collection of Task objects. This Task object will be defined in javascript and instantiated for task in the visible page.
 
 The Task object will have data elements for each of the fields above.
 
@@ -71,7 +115,7 @@ saveTask(task);
  * A boolean will be returned with the result of the delete operation.
  *
  * Params:
- *   task - a filled Task object
+ *   task_id - task_id of task to delete
  *
  * Returns:
  *    boolean true or false
