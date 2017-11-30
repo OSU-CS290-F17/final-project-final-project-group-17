@@ -43,7 +43,7 @@ app.post("/ajax/savetask", function(req, res) {
 
 app.get('/', function (req, res)
 {
-	res.status(200).render('index', {task: serveDB});
+	res.status(200).render('index', {task: JSON.parse(db.loadAllTasks())});
 });
 
 // app.get('/tasks/:postId', function(req, res, next) {
