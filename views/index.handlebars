@@ -3,9 +3,14 @@
   <div id="container">
 
     {{#each task}}
-			{{> groupTemplate}}
+
+			{{> group}}
+			{{> tasks}}
+
 		{{/each}}
 
-  </section>
+  </div>
+
 {{addTask}}
+
 </main>
