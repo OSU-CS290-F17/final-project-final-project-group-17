@@ -3,4 +3,7 @@
 		<h2 class="group-header-title">Group {{letter}}</h2>
 		<h2 class="group-header-add-task" id="add-task-{{letter}}">+</h2>
 	</span>
+	{{#each tasks}}
+		 {{> task}}
+	{{/each}}
 </div>

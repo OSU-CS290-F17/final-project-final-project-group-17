@@ -1,6 +1,3 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.runtime.js"></script>
-<script src="/groupTemplate.js"></script>
-
 function modalVisible(){
 	var addModal = document.getElementById('add-task-modal');
   	var modalBackdrop = document.getElementById('modal-backdrop');
@@ -77,17 +74,20 @@ function taskEEventHandle() {
 	modalAccept(group);
 }
 
-var cancelModal = document.getElementById('cancel-modal-button');
-cancelModal.addEventListener('click', modalHide);
+window.addEventListener('DOMContentReady', function() {
+	var cancelModal = document.getElementById('cancel-modal-button');
+	cancelModal.addEventListener('click', modalHide);
 
-var addTaskA = document.getElementById('add-task-A');
-var addTaskB = document.getElementById('add-task-B');
-var addTaskC = document.getElementById('add-task-C');
-var addTaskD = document.getElementById('add-task-D');
-var addTaskE = document.getElementById('add-task-E');
+	var addTaskA = document.getElementById('add-task-A');
+	var addTaskB = document.getElementById('add-task-B');
+	var addTaskC = document.getElementById('add-task-C');
+	var addTaskD = document.getElementById('add-task-D');
+	var addTaskE = document.getElementById('add-task-E');
 
-addTaskA.addEventListener('click', taskAEventHandle);
-addTaskB.addEventListener('click', taskBEventHandle);
-addTaskC.addEventListener('click', taskCEventHandle);
-addTaskD.addEventListener('click', taskDEventHandle);
-addTaskE.addEventListener('click', taskEEventHandle);
+	addTaskA.addEventListener('click', taskAEventHandle);
+	addTaskB.addEventListener('click', taskBEventHandle);
+	addTaskC.addEventListener('click', taskCEventHandle);
+	addTaskD.addEventListener('click', taskDEventHandle);
+	addTaskE.addEventListener('click', taskEEventHandle);
+
+});

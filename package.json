@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node js/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "handlebars views/partials/group.handlebars -f public/groupTemplate.js",
+    "build": "handlebars views/partials/task.handlebars -f public/taskTemplate.js",
     "prestart": "npm run build"
   },
   "repository": {

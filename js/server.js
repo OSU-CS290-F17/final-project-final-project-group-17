@@ -17,11 +17,11 @@ app.use(bp.json());
 
 /* Database Middleware */
 app.get("/ajax/loadtasks", function(req, res) {
-  res.status(200).send(db.loadAllTasks());
+  res.status(200).send(JSON.stringify(db.loadAllTasks()));
 });
 
 app.get("/ajax/loadtasks/:groupId", function(req, res) {
-  res.status(200).send(db.loadAllTasksByGroup(req.params.groupId));
+  res.status(200).send(JSON.stringify(db.loadAllTasksByGroup(req.params.groupId)));
 });
 
 app.get("/ajax/deltask/:taskId", function(req, res) {
@@ -43,7 +43,7 @@ app.post("/ajax/savetask", function(req, res) {
 
 app.get('/', function (req, res)
 {
-	res.status(200).render('index', {task: JSON.parse(db.loadAllTasks())});
+	res.status(200).render('index', {tasks: db.loadAllTasks()});
 });
 
 // app.get('/tasks/:postId', function(req, res, next) {

@@ -39,7 +39,7 @@ FileDatabase.prototype.loadAllTasks = function() {
     data[task_group]["tasks"] = this.loadAllTasksByGroup(task_group);
   }.bind(this));
 
-  return JSON.stringify(data);
+  return data;
 
 }
 
@@ -59,7 +59,7 @@ FileDatabase.prototype.loadAllTasksByGroup = function(group) {
       filtered.push(task);
     }
   });
-  return JSON.stringify(filtered);
+  return filtered;
 }
 
 /* Save a task object to the database. If the object does not contain a task_id
