@@ -26,7 +26,20 @@
  */
 FileDatabase.prototype.loadAllTasks = function() {
 
-  return JSON.stringify(this.tasksDB["tasks"]);
+  var groups = ['A', 'B', 'C', 'D', 'E'];
+  var data = { };
+  groups.forEach(function(task_group) {
+    if (!data[task_group]) {
+      data[task_group] = {};
+    }
+    if (!data[task_group]["tasks"]) {
+      data[task_group]["tasks"] = [];
+    }
+    data[task_group]["letter"] = task_group;
+    data[task_group]["tasks"] = this.loadAllTasksByGroup(task_group);
+  }.bind(this));
+
+  return JSON.stringify(data);
 
 }
 
