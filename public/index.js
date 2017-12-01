@@ -1,3 +1,6 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.runtime.js"></script>
+<script src="/groupTemplate.js"></script>
+
 function modalVisible(){
 	var addModal = document.getElementById('add-task-modal');
   	var modalBackdrop = document.getElementById('modal-backdrop');
