@@ -8,6 +8,18 @@ var port     = process.env.PORT || 3000;
 var bp       = require('body-parser');
 var db       = require('./database');
 var serveDB = require('./db.json');
+//mongo stuff
+var MongoClient = require('mongodb').MongoClient;
+var mongoHost = process.env.MONGO_HOST;
+var mongoPort = process.env.MONGO_PORT || 27017;
+var mongoUser = process.env.MONGO_USER;
+var mongoPassword = process.env.MONGO_PASSWORD;
+var mongoDBName = process.env.MONGO_DB;
+
+var mongoURL = 'mongodb://' + mongoUser + ':' + mongoPassword +
+  '@' + mongoHost + ':' + mongoPort + '/' + mongoDBName;
+
+var mongoConnection = null;
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
@@ -57,6 +69,18 @@ app.get('/', function (req, res)
 // 	{
 // 		next();
 // 	}
+// });
+
+//heres the mongo error handling
+
+// MongoClient.connect(mongoURL, function (err, connection) {
+//   if (err) {
+//     throw err;
+//   }
+//   mongoConnection = connection;
+//   app.listen(port, function () {
+//     console.log("== Server listening on port:", port);
+//   });
 // });
 
 /* Serve public directory */
