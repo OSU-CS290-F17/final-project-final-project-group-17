@@ -17,6 +17,11 @@ module.exports = new FileDatabase();
    this.connection = null;
  }
 
+ /*
+  * Initialize the db class with references to mongo interface and a
+  * successful conncetion object.
+  *
+  */
  MongoDatabase.prototype.init = function(mongo, conn) {
    this.mdb = mongo;
    this.connection = conn;
@@ -24,7 +29,8 @@ module.exports = new FileDatabase();
  }
 
 
- /* Load all Task objects from the database sorted by task_group
+ /*
+  * Load all Task objects from the database sorted by task_group
   * then sort them by task_priority.
   *
   * Callback:
@@ -32,6 +38,8 @@ module.exports = new FileDatabase();
   */
  MongoDatabase.prototype.loadAllTasks = function(callback) {
 
+   // Query for all tasks, construct a array of objects with _id and tasks properties
+   // then sort the array by task_group (_id)
    this.collection.aggregate( [ { $group : { _id: "$task_group", tasks: { $push: "$$ROOT" } } },
                                 { $sort: {_id: 1} } ], function (err, results) {
      if (err) {
@@ -63,7 +71,7 @@ module.exports = new FileDatabase();
   */
 MongoDatabase.prototype.deleteTask = function(task_id, callback) {
 
-   //var mdb = require('mongodb')
+   // Convert task_id to ObjectId and request deletion from collection
    this.collection.deleteOne( { _id: new this.mdb.ObjectId(task_id) }, function(err, result) {
       if (err) {
         callback(true);
@@ -89,7 +97,7 @@ MongoDatabase.prototype.deleteTask = function(task_id, callback) {
   */
  MongoDatabase.prototype.saveTask = function(task, callback) {
 
-   // translate task_id to a Mongo ObjectId
+   // Translate task_id to a Mongo ObjectId
    if (task.task_id == '') {
      id = new this.mdb.ObjectId();
    } else {
@@ -105,7 +113,6 @@ MongoDatabase.prototype.deleteTask = function(task_id, callback) {
        callback(false, result.lastErrorObject.upserted || result.value._id);
      }
    });
-
 }
 
 
@@ -224,13 +231,17 @@ FileDatabase.prototype.deleteTask = function(task_id, callback) {
 }
 
 /*
- * Safe task database to disk.
+ * Save task database to disk.
  *
  */
 FileDatabase.prototype._saveToDisk = function() {
   this.fs.writeFileSync('./js/db.json', JSON.stringify(this.tasksDB, null, 2) , 'utf-8');
 }
 
+/*
+ * Empty to match MongoDatabase prototypes
+ *
+ */
 FileDatabase.prototype.init = function() {
 
 }
