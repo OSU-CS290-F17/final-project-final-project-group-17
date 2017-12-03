@@ -8,8 +8,8 @@
  *
  */
 
- //module.exports = new MongoDatabase();
-module.exports = new FileDatabase();
+module.exports = new MongoDatabase();
+//module.exports = new FileDatabase();
 
 
  function MongoDatabase() {
@@ -51,8 +51,25 @@ module.exports = new FileDatabase();
           return a["task_priority"] - b["task_priority"];
         });
       });
+      
+      // If we are missing a group, add them in
+      var groups = ['A','B','C','D'];
+      var final = [];
+      groups.forEach(function(gid) {
+          found = false;
+          for(var i = 0; i < results.length; i++) {
+            if (results[i]._id == gid) {
+              final.push(results[i]);
+              found = true;
+            }
+          }
+          if (!found) {
+            final.push({ _id: gid, tasks: []});
+          }
+      })
 
-      callback(false, results);
+
+      callback(false, final);
     }
    });
  }
