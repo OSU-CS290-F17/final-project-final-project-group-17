@@ -135,7 +135,7 @@ FileDatabase.prototype.loadAllTasks = function(callback) {
     if (!data[task_group]["tasks"]) {
       data[task_group]["tasks"] = [];
     }
-    data[task_group]["letter"] = task_group;
+    data[task_group]["_id"] = task_group;
     data[task_group]["tasks"] = this.loadAllTasksByGroup(task_group);
 
   }.bind(this));
