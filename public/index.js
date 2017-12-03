@@ -30,6 +30,26 @@ function modalHide() {
   	clearInputs();
 }
 
+function addTask(postVals) {
+
+    var addRequest = new XMLHttpRequest();
+    addRequest.open('POST', '/ajax/savetask');
+    addRequest.addEventListener('load', function(event) {
+
+      data = JSON.parse(event.target.response);
+      document.getElementById('task_id').value = data.task_id;
+      document.getElementById('rm_task_id').value = data.task_id;
+
+      results.textContent = "Add: " + event.target.status + " : " + event.target.response;
+    });
+
+    addRequest.setRequestHeader('Content-Type', 'application/json');
+    addRequest.send(JSON.stringify(postVals));
+
+    loadTasks();
+    event.preventDefault();
+}
+
 function modalAccept(group) {
 	var shortDesc = document.getElementById('add-task-short');
 	var date = document.getElementById('add-task-date');
@@ -40,38 +60,65 @@ function modalAccept(group) {
 		alert("All fields must be entered properly");
 	}
 	else{
-		//handle sending data to server and posting
+		var postVals = {
+      		"task_group": group,
+      		"task_title": shortDesc,
+      		"task_details": longDesc,
+      		"task_priority": priority,
+      		"date_due": date,
+    	}
+    	addTask(postVals);
 	}
 }
 
+var acceptButton = document.getElementById('accept-modal-button');
+
 function taskAEventHandle() {
-	modalVisible;
+	modalVisible();
 	var group = 'A';
-	modalAccept(group);
+	acceptButton.addEventListener('click', modalAccept(group));
 }
 
 function taskBEventHandle() {
-	modalVisible;
+	modalVisible();
 	var group = 'B';
-	modalAccept(group);
+	acceptButton.addEventListener('click', modalAccept(group));
 }
 
 function taskCEventHandle() {
-	modalVisible;
+	modalVisible();
 	var group = 'C';
-	modalAccept(group);
+	acceptButton.addEventListener('click', modalAccept(group));
 }
 
 function taskDEventHandle() {
-	modalVisible;
+	modalVisible();
 	var group = 'D';
-	modalAccept(group);
+	acceptButton.addEventListener('click', modalAccept(group));
 }
 
 function taskEEventHandle() {
-	modalVisible;
+	modalVisible();
 	var group = 'E';
-	modalAccept(group);
+	acceptButton.addEventListener('click', modalAccept(group));
+}
+
+function taskDeletion(i) {
+	var getTasks = document.getElementsByClassName('task-container');
+	var getID = getTasks[i].dataset.id;
+
+    var rmRequest = new XMLHttpRequest();
+    rmRequest.open('GET', '/ajax/deltask/' + getID);
+    rmRequest.addEventListener('load', function(event) {
+    	document.getElementById('task_id').value = '';
+      	document.getElementById('rm_task_id').value = '';
+      	results.textContent = "Remove: " + event.target.status + " : " + event.target.response;
+    });
+
+    rmRequest.send();
+
+    loadTasks();
+    event.preventDefault();
 }
 
 window.addEventListener('DOMContentReady', function() {
@@ -89,5 +136,10 @@ window.addEventListener('DOMContentReady', function() {
 	addTaskC.addEventListener('click', taskCEventHandle);
 	addTaskD.addEventListener('click', taskDEventHandle);
 	addTaskE.addEventListener('click', taskEEventHandle);
+
+	var deleteTask = document.getElementsByClassName('remove-task');
+	for(i = 0; i < deleteTask.length; i++){
+		deleteTask[i].addEventListener('click', taskDeletion(i));
+	}
 
 });

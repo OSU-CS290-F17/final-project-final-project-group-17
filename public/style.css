@@ -33,7 +33,7 @@ header
 	flex-wrap: wrap;
 
 	margin: 1%;
-	border: solid rgba(0,0,0,.25);
+	/* border: solid rgba(0,0,0,.25); */
 }
 
 .group-container
@@ -113,6 +113,7 @@ header
 
 .task-container span .remove-task
 {
+	vertical-align: top;
 	font-size: 16px;
 	padding: 0 5px;
 	border-radius: 3px;
@@ -130,12 +131,14 @@ header
 
 .task-container span .edit-task
 {
-	vertical-align: bottom;
-	font-size: 18px;
+	vertical-align: top;
+	font-size: 16px;
+	padding: 0 2px;
 	color: white;
 	background-color: black;
+	border: none;
 	border-radius: 3px;
-	margin: 5px;
+	/* margin: 5px; */
 }
 
 .task-container span .edit-task:hover
