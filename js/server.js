@@ -59,6 +59,7 @@ app.post("/ajax/savetask", function(req, res) {
   });
 });
 
+// function to render pages and tasks or 404
 app.get('/', function (req, res)
 {
 
