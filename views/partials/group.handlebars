@@ -1,7 +1,7 @@
-<div class="group-container" id="group-{{letter}}">
-	<span class="group-container-header" id="group-{{letter}}-header">
-		<h2 class="group-header-title">Group {{letter}}</h2>
-		<h2><button class="group-header-add-task" id="add-task-{{letter}}">+</button></h2>
+<div class="group-container" id="group-{{_id}}">
+	<span class="group-container-header" id="group-{{_id}}-header">
+		<h2 class="group-header-title">Group {{_id}}</h2>
+		<h2><button class="group-header-add-task" id="add-task-{{_id}}">+</button></h2>
 	</span>
 	{{#each tasks}}
 		 {{> task}}
