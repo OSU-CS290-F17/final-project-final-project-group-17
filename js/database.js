@@ -15,7 +15,8 @@
    this.connection = null;
  }
 
- MongoDatabase.prototype.init = function(conn) {
+ MongoDatabase.prototype.init = function(mongo, conn) {
+   this.mdb = mongo;
    this.connection = conn;
    this.collection = conn.collection('taskList');
  }
@@ -59,8 +60,8 @@
   */
 MongoDatabase.prototype.deleteTask = function(task_id, callback) {
 
-   var mdb = require('mongodb')
-   this.collection.deleteOne( { _id: new mdb.ObjectId(task_id) }, function(err, result) {
+   //var mdb = require('mongodb')
+   this.collection.deleteOne( { _id: new this.mdb.ObjectId(task_id) }, function(err, result) {
       if (err) {
         callback(true);
       } else {
@@ -81,22 +82,36 @@ MongoDatabase.prototype.deleteTask = function(task_id, callback) {
   * Params:
   *   task - a filled Task object
   *
-  * Returns:
-  *    object { status: true || false, task_id: task_id }
+  * Callback:
+  *    true if error otherwise false and task_id
   */
  MongoDatabase.prototype.saveTask = function(task, callback) {
+  // var mdb = require('mongodb');
 
-   this.collection.insert(task, function(err){
+   // translate task_id to a Mongo ObjectId
+   if (task.task_id == '') {
+     id = new this.mdb.ObjectId();
+   } else {
+     id = new this.mdb.ObjectId(task.task_id);
+   }
+   delete task.task_id;
+
+    console.log("==upsert task", task);
+   this.collection.findOneAndUpdate({_id: id}, task, {upsert: true, new: true}, function(err, result){
      if (err) {
        callback(true);
      } else {
-       callback(false, task._id);
+       console.log("==upserted task", task, result.lastErrorObject.upserted || result.value._id);
+       callback(false, result.lastErrorObject.upserted || result.value._id);
      }
-
    });
+
 }
 
-//
+
+/* ############################ FileDatabase ############################## */
+
+
 //
 //  module.exports = new FileDatabase();
 //
@@ -211,4 +226,8 @@ MongoDatabase.prototype.deleteTask = function(task_id, callback) {
 //  */
 // FileDatabase.prototype._saveToDisk = function() {
 //   this.fs.writeFileSync('./js/db.json', JSON.stringify(this.tasksDB, null, 2) , 'utf-8');
+// }
+//
+// FileDatabase.prototype.init = function() {
+//
 // }

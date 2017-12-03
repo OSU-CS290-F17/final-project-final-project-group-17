@@ -15,6 +15,6 @@ templates['task'] = template({"compiler":[7,">= 4.0.0"],"main":function(containe
     + alias4(((helper = (helper = helpers.date_added || (depth0 != null ? depth0.date_added : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"date_added","hash":{},"data":data}) : helper)))
     + "</h1>\n		<h1 class=\"due-date\">"
     + alias4(((helper = (helper = helpers.date_due || (depth0 != null ? depth0.date_due : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"date_due","hash":{},"data":data}) : helper)))
-    + "</h1>\n		<h1><button class=\"remove-task\">--</button></h1>\n	</span>\n</div>\n";
+    + "</h1>\n		<button class=\"remove-task\" type=\"button\">x</button>\n		<button class=\"material-icons edit-task\" type=\"button\">mode_edit</button>\n		\n	</span>\n</div>\n";
 },"useData":true});
 })();

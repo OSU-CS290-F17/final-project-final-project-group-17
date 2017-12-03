@@ -9,12 +9,13 @@ var bp       = require('body-parser');
 var db       = require('./database');
 
 //mongo stuff
-var MongoClient = require('mongodb').MongoClient;
-var mongoHost = process.env.MONGO_HOST || 'localhost';
+var mongo = require('mongodb');
+var MongoClient = mongo.MongoClient;
+var mongoHost = process.env.MONGO_HOST;
 var mongoPort = process.env.MONGO_PORT || 27017;
-var mongoUser = process.env.MONGO_USER || 'lunitin';
-var mongoPassword = process.env.MONGO_PASSWORD || 'cackle';
-var mongoDBName = process.env.MONGO_DB || "taskList";
+var mongoUser = process.env.MONGO_USER;
+var mongoPassword = process.env.MONGO_PASSWORD;
+var mongoDBName = process.env.MONGO_DB;
 
 var mongoURL = 'mongodb://' + mongoUser + ':' + mongoPassword +
   '@' + mongoHost + ':' + mongoPort + '/' + mongoDBName;
@@ -87,7 +88,7 @@ MongoClient.connect(mongoURL, function (err, connection) {
   if (err) {
     throw err;
   }
-  db.init(connection);
+  db.init(mongo, connection);
 
   app.listen(port, function () {
     console.log("== Server listening on port:", port);

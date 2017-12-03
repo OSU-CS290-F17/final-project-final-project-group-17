@@ -1,7 +1,7 @@
 <div class="group-container" id="group-{{_id}}">
 	<span class="group-container-header" id="group-{{_id}}-header">
 		<h2 class="group-header-title">Group {{_id}}</h2>
-		<h2><button class="group-header-add-task" id="add-task-{{_id}}">+</button></h2>
+		<button class="group-header-add-task" id="add-task-{{_id}}" type="button">+</button>
 	</span>
 	{{#each tasks}}
 		 {{> task}}
