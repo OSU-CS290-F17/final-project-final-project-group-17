@@ -88,6 +88,8 @@ MongoClient.connect(mongoURL, function (err, connection) {
   if (err) {
     throw err;
   }
+
+  // Hand off mongo library and connection to db
   db.init(mongo, connection);
 
   app.listen(port, function () {
