@@ -109,12 +109,6 @@ header
 	margin: 5px;
 }
 
-.task-container span h1:first-child:hover
-{
-	text-decoration: underline;
-	cursor: pointer;
-	color: blue;
-}
 
 .task-container span .remove-task
 {
@@ -122,10 +116,11 @@ header
 	font-size: 16px;
 	padding: 0 5px;
 	border-radius: 3px;
-	border-width: 0;
+	border: 1px solid rgba(94, 208, 211, .85);
 	background-color: rgba(94, 208, 211, .85);
 	/* color: #ED312E; */
 	color: white;
+  margin-top: 5px;
 }
 
 .task-container span .remove-task:hover
@@ -138,12 +133,13 @@ header
 {
 	vertical-align: top;
 	font-size: 16px;
-	padding: 0 2px;
+	padding: 1px 2px 0 2px;
 	color: white;
 	background-color: black;
-	border: none;
+	border: 1px solid black;
 	border-radius: 3px;
-	/* margin: 5px; */
+	margin: 5px;
+
 }
 
 .task-container span .edit-task:hover
@@ -151,6 +147,7 @@ header
 	cursor: pointer;
 	color: black;
 	background-color: white;
+  border: 1px solid black;
 }
 
 /*contains the styling for the 404 page content */
