@@ -46,8 +46,12 @@ function addTask(postVals) {
 					var task = document.getElementById(postVals["task_id"]);
 					task.parentNode.removeChild(task);
 				}
+
 					postVals._id = data.task_id;
 					var newtask = Handlebars.templates.task(postVals);
+
+					// @TODO Search this group and insert the task in the right place
+					// according to task_priority instead of at the end
 					var group = document.getElementById("group-" + postVals["task_group"]);
 					group.insertAdjacentHTML('beforeend', newtask);
 
@@ -126,7 +130,7 @@ function taskEdit(task_id) {
 	document.getElementById('add-task-date').value  = date.textContent;
 	document.getElementById('add-task-short').value = shortDesc.textContent;
 
-	// modalAccept will handle upsert connection
+	// modalAccept() will handle upsert connection now
 
 	modalVisible();
 }
