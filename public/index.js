@@ -33,6 +33,43 @@ function modalHide() {
 }
 
 
+function getPriority(task){
+	console.log(task.dataset.priority);
+	return task.dataset.priority;
+}
+
+
+function sortGroup(taskGroup){
+	var sortTasks = document.getElementsByClassName("task-container");
+	var array = [];
+	var i;
+	
+	for(i = 0; i < sortTasks.length; i++){
+		if(sortTasks[i].dataset.group == taskGroup)
+			array.push(sortTasks[i]);//store tasks to be sorted
+	}
+
+	array.sort(function(a, b){return getPriority(a) - getPriority(b)});
+/*
+	//bubble sort
+	var swapped = true;
+	var tmp;
+	while(swapped){
+		swapped = false;
+		for(i = 1; i < array.length; i++){
+			if(array[i].dataset.priority < array[i-1].dataset.priority){
+				tmp = array[i];
+				array[i] = array[i-1];
+				array[i-1] = tmp;
+				swapped = true;
+			}
+		}
+	}*/
+	for(i = 0; i < array.length; i++)
+		console.log(array[i]);
+}
+
+
 function addTask(postVals) {
 
     var addRequest = new XMLHttpRequest();
@@ -54,6 +91,7 @@ function addTask(postVals) {
 					// according to task_priority instead of at the end
 					var group = document.getElementById("group-" + postVals["task_group"]);
 					group.insertAdjacentHTML('beforeend', newtask);
+					sortGroup(postVals["task_group"]);
 
 				modalHide();
 			} else {
