@@ -1,4 +1,8 @@
 /* Node.js server defined here */
+/* is middleware between client and server serving pages */
+
+// Task Organizer server.js FA17_CS290
+// Name: Nicholas Davies
 
 var path     = require('path');
 var express  = require('express');
@@ -97,3 +101,7 @@ MongoClient.connect(mongoURL, function (err, connection) {
     console.log("== Server listening on port:", port);
   });
 });
+
+// app.listen(port, function () {
+//      console.log("== Server listening on port:", port);
+// 	 });

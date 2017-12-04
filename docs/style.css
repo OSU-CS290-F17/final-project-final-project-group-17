@@ -5,7 +5,7 @@ body
 
 /*contains all the styling for the elements in the header*/
 header
-{	
+{
 	background-color: #FF6D10;
 	height: 20mm;
 }
@@ -24,14 +24,14 @@ header
 {
 	display: flex;
 	flex-wrap: wrap;
-	
+
 	margin: 1%;
 	border: solid rgba(0,0,0,.25);
 }
 
 .group-container
 {
-	width: 40%;
+	width: 100%;
 	flex: auto;
 	margin: 1%;
 	border: solid rgba(0,0,0,.25);
@@ -61,13 +61,12 @@ header
 	border-radius: 3px;
 	color: white;
 	background-color:black;
-	
+
 }
 
 /*Contains the styling for the tasks and their containers*/
 .task-container
 {
-	display: flex;
 	justify-content: center;
 }
 
@@ -77,6 +76,7 @@ header
 	font-family: "Ubuntu", sans-serif;
 	font-weight: 400;
 	font-size: 14px;
+	padding-left: 40px;
 }
 
 .task-container span .remove-task
@@ -117,7 +117,7 @@ header
 	right: 0;
 	z-index: 1010;
 
-	
+
 }
 
 #close-modal-top
@@ -146,7 +146,7 @@ header
 {
 	margin: 10px;
 	width: 70%;
-	
+
 }
 
 .hidden

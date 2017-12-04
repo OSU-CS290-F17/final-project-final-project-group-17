@@ -51,7 +51,7 @@ module.exports = new MongoDatabase();
           return a["task_priority"] - b["task_priority"];
         });
       });
-      
+
       // If we are missing a group, add them in
       var groups = ['A','B','C','D'];
       var final = [];
