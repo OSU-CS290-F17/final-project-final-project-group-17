@@ -34,8 +34,20 @@ function modalHide() {
 
 
 function getPriority(task){
-	console.log(task.dataset.priority);
 	return task.dataset.priority;
+}
+
+
+function createSortedGroup(sortedArray, taskGroup){
+	var i;
+	var group = document.getElementById("group-" + taskGroup);
+	var header = group.childNodes[1].cloneNode(true);
+	console.log(header);
+	group.innerHTML = '';
+	group.appendChild(header);
+	for(i = 0; i < sortedArray.length; i++){
+		group.appendChild(sortedArray[i]);
+	}
 }
 
 
@@ -50,23 +62,8 @@ function sortGroup(taskGroup){
 	}
 
 	array.sort(function(a, b){return getPriority(a) - getPriority(b)});
-/*
-	//bubble sort
-	var swapped = true;
-	var tmp;
-	while(swapped){
-		swapped = false;
-		for(i = 1; i < array.length; i++){
-			if(array[i].dataset.priority < array[i-1].dataset.priority){
-				tmp = array[i];
-				array[i] = array[i-1];
-				array[i-1] = tmp;
-				swapped = true;
-			}
-		}
-	}*/
-	for(i = 0; i < array.length; i++)
-		console.log(array[i]);
+
+	createSortedGroup(array, taskGroup);
 }
 
 
@@ -91,7 +88,7 @@ function addTask(postVals) {
 					// according to task_priority instead of at the end
 					var group = document.getElementById("group-" + postVals["task_group"]);
 					group.insertAdjacentHTML('beforeend', newtask);
-					sortGroup(postVals["task_group"]);
+					sortGroup(postVals["task_group"]); //sorts after every input
 
 				modalHide();
 			} else {
