@@ -41,9 +41,10 @@ function getPriority(task){
 function createSortedGroup(sortedArray, taskGroup){
 	var i;
 	var group = document.getElementById("group-" + taskGroup);
+	var errorCheck = group.childNodes[0].cloneNode(true);
 	var header = group.childNodes[1].cloneNode(true);
-	console.log(header);
 	group.innerHTML = '';
+	group.appendChild(errorCheck);
 	group.appendChild(header);
 	for(i = 0; i < sortedArray.length; i++){
 		group.appendChild(sortedArray[i]);
