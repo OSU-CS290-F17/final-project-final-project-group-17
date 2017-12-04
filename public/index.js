@@ -6,6 +6,7 @@ function modalVisible(){
   	modalBackdrop.classList.remove('hidden');
 }
 
+
 function clearInputs() {
 	var addTaskInputElements = [
 		document.getElementById('add-task-id'),
@@ -19,6 +20,7 @@ function clearInputs() {
 	});
 }
 
+
 function modalHide() {
 
   	var addModal = document.getElementById('add-task-modal');
@@ -30,25 +32,22 @@ function modalHide() {
   	clearInputs();
 }
 
-function addTask(postVals) {
 
+function addTask(postVals) {
 
     var addRequest = new XMLHttpRequest();
     addRequest.open('POST', '/ajax/savetask');
     addRequest.addEventListener('load', function(event) {
       data = JSON.parse(event.target.response);
-      // console.log("== Add: " + event.target.status + " : " + event.target.response);
 
 			if (event.target.status == 200 ) {
 				// Remove old element on edit
 				if (postVals["task_id"]) {
 					var task = document.getElementById(postVals["task_id"]);
-					//console.log("== taskNode", task, task.parentNode);
 					task.parentNode.removeChild(task);
 				}
 					postVals._id = data.task_id;
 					var newtask = Handlebars.templates.task(postVals);
-					// console.log("==new task", newtask);
 					var group = document.getElementById("group-" + postVals["task_group"]);
 					group.insertAdjacentHTML('beforeend', newtask);
 
@@ -65,6 +64,7 @@ function addTask(postVals) {
     event.preventDefault();
 }
 
+
 function modalAccept() {
 	var task_id = document.getElementById('add-task-id');
 	var shortDesc = document.getElementById('add-task-short');
@@ -74,23 +74,20 @@ function modalAccept() {
 
 	if(!shortDesc.value || !date.value || !priority.value ){
 		alert("All fields must be entered properly");
-	}
-	else{
+	} else {
 		var postVals = {
       		"task_group": group.value,
       		"task_title": shortDesc.value,
       		"task_priority": priority.value,
       		"date_due": date.value,
     	}
+			// Add in the task_id for an update operation
 			if (task_id.value) {
 				postVals["task_id"] = task_id.value;
 			}
-			console.log("== postVals", postVals);
     	addTask(postVals);
 	}
 }
-
-
 
 
 function taskDeletion(getID) {
@@ -116,14 +113,12 @@ function taskDeletion(getID) {
     event.preventDefault();
 }
 
+
 function taskEdit(task_id) {
 
 	var task = document.getElementById(task_id);
 	var date = task.querySelector(".due-date");
 	var shortDesc = task.querySelector(".short-desc");
-
-	// console.log("== date", date);
-	// console.log("== sdec", shortDesc);
 
   document.getElementById('add-task-id').value    = task_id;
 	document.getElementById('add-task-group').value = task.getAttribute("data-group");
@@ -131,23 +126,11 @@ function taskEdit(task_id) {
 	document.getElementById('add-task-date').value  = date.textContent;
 	document.getElementById('add-task-short').value = shortDesc.textContent;
 
-	// var acceptButton = document.getElementById('accept-modal-button');
-	// acceptButton.addEventListener('click', function() {
-	// 	console.log("== callbacks", task_id, task, date, shortDesc);
-	// 	// task.setAttribute("data-group", document.getElementById('add-task-group').value);
-	// 	// task.setAttribute("data-priority", document.getElementById('add-task-prio').value);
-	// 	// date.textContent = document.getElementById('add-task-date').value;
-	// 	// shortDesc.textContent = document.getElementById('add-task-short').value;
-	// 	addTask({ "task_id": task_id,
-	// 						"task_group": document.getElementById('add-task-group').value,
-	// 						"task_title": document.getElementById('add-task-short').value,
-	// 						"task_priority": document.getElementById('add-task-prio').value,
-	// 						"date_due": document.getElementById('add-task-date').value
-	// 					});
-  //
-	// }.bind(task_id, task, date, shortDesc));
+	// modalAccept will handle upsert connection
+
 	modalVisible();
 }
+
 
 function taskActions(event) {
 
@@ -158,6 +141,7 @@ function taskActions(event) {
 		taskEdit(event.target.getAttribute("data-id"));
 	}
 }
+
 
 window.addEventListener('DOMContentLoaded', function() {
 	var cancelModal = document.getElementById('cancel-modal-button');
