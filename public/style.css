@@ -30,6 +30,12 @@ header
 	font-weight: 700;
 	padding-top: 1%;
 	padding-left: 2%;
+
+}
+
+#site-title h1 a {
+    text-decoration: none;
+    color: black;
 }
 
 /*contains all the styling for the group container elements*/
