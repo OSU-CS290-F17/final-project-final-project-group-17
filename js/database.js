@@ -210,19 +210,19 @@ FileDatabase.prototype.saveTask = function(task, callback) {
   // should we do error correction here?
 
   // lazy modfiy, delete old task and insert new with the same task_id
-  if (parseInt(task.task_id) > 0) {
-    this.deleteTask(task.task_id, function(err, result) {
+  if (parseInt(task._id) > 0) {
+    this.deleteTask(task._id, function(err, result) {
      this.tasksDB["tasks"].push(task);
      }.bind(this));
   } else {
     // increment task_id and push new task
     this.tasksDB["max_task_id"]++;
-    task.task_id = this.tasksDB["max_task_id"];
+    task._id = this.tasksDB["max_task_id"];
     this.tasksDB["tasks"].push(task);
   }
 
   this._saveToDisk();
-  callback(false, task.task_id);
+  callback(false, task._id);
 
 }
 
@@ -240,7 +240,7 @@ FileDatabase.prototype.saveTask = function(task, callback) {
 FileDatabase.prototype.deleteTask = function(task_id, callback) {
   var start_size = this.tasksDB["tasks"].length;
 
-  this.tasksDB["tasks"] = this.tasksDB["tasks"].filter( function(row) { return (row.task_id != task_id) });
+  this.tasksDB["tasks"] = this.tasksDB["tasks"].filter( function(row) { return (row._id != task_id) });
 
   this._saveToDisk();
   callback(false, this.tasksDB["tasks"].length < start_size);

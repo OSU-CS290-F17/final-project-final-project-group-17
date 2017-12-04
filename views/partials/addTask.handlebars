@@ -7,11 +7,19 @@
 		</span>
 
 		<form id="input-container">
-			<h4 class="input-descriptor">Short Description:</h4><input class="add-task-input" id="add-task-short" type="text" name="shortDesc" maxlength=50><br>
-			<h4 class="input-descriptor">Due Date:</h4><input class="add-task-input" id="add-task-date" type="date" name="dueDate"><br>
-			<h4 class="input-descriptor">Task Priority:</h4><input class="add-task-input" id="add-task-prio" type="number"><br>
-			<h4 class="input-descriptor">Full Description:</h4><input class="add-task-input" id="add-task-long" type="text" name="fullDesc"><br>
+			<input type="hidden" id="add-task-id" name="add-task-id">
+			<label for="add-task-short" class="input-descriptor">Task Title:</label><input class="add-task-input" id="add-task-short" type="text" name="shortDesc" maxlength=50><br>
+			<label for="add-task-date" class="input-descriptor">Due Date:</label><input class="add-task-input" id="add-task-date" type="date" name="dueDate"><br>
+			<label for="add-task-prio" class="input-descriptor">Priority:</label><input class="add-task-input" id="add-task-prio" type="number"><br>
+			<label for="add-task-group" class="input-descriptor">Group:</label>
+			<select class="add-task-input" id="add-task-group" name="group">
+				<option>A</option>
+				<option>B</option>
+				<option>C</option>
+				<option>D</option>
+			</select><br>
 		</form>
+
 
 		<div class="modal-buttons">
 			<button id="accept-modal-button" type="button">Accept</button>

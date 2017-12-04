@@ -17,6 +17,12 @@ header
 	height: 20mm;
 }
 
+.header-add-task {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+}
+
 #site-title h1
 {
 	font-size: 250%;
@@ -67,7 +73,7 @@ header
 	cursor: pointer;
 }
 
-.group-header-add-task
+.group-header-add-task, .header-add-task
 {
 	font-size: 18px;
 	margin: 1px;
@@ -77,10 +83,9 @@ header
 	border-width: 0;
 	color: white;
 	background-color:black;
-
 }
 
-.group-header-add-task:hover
+.group-header-add-task:hover, .header-add-task:hover
 {
 	cursor: pointer;
 	color: black;
@@ -250,5 +255,5 @@ header
 
 .hidden
 {
-	display: none; 
+	display: none;
 }
